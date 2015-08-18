@@ -34,13 +34,15 @@ migrate("openmrs/apps/clinical/visit.json", function (jsonObject) {
         var tabKey = tab.title.toLowerCase().replace(/\s/g, "_"); //Replace all spaces with _
         visitMap[tabKey] = tab;
 
-        //Covert the sections in a tab to map
-        var sectionsMap = {};
-        tab.sections.forEach(function (section) {
-            var sectionKey = section.type.toLowerCase().replace(/\s/g, "_"); //Replace all spaces with _
-            sectionsMap[sectionKey] = section;
-        });
-        tab.sections = sectionsMap;
+        if(tab.sections) {
+            //Covert the sections in a tab to map
+            var sectionsMap = {};
+            tab.sections.forEach(function (section) {
+                var sectionKey = section.type.toLowerCase().replace(/\s/g, "_"); //Replace all spaces with _
+                sectionsMap[sectionKey] = section;
+            });
+            tab.sections = sectionsMap;
+        }
     });
     return visitMap;
 });
