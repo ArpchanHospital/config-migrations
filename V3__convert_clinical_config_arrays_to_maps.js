@@ -22,7 +22,8 @@ migrate("openmrs/apps/clinical/dashboard.json", function (jsonObject) {
 migrate("openmrs/apps/clinical/extension.json", function (jsonObject) {
     var extensionMap = {};
     jsonObject.forEach(function (extension) {
-        var extensionKey = extension.id.toLowerCase().replace(/\./g, "_"); //Replace all . with _
+        var identifier = extension.label || extension.id;
+        var extensionKey = identifier.toLowerCase().replace(/[\.\s]/g, "_"); //Replace all dots and spaces with _
         extensionMap[extensionKey] = extension;
     });
     return extensionMap;
