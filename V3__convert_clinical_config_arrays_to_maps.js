@@ -38,7 +38,8 @@ migrate("openmrs/apps/clinical/visit.json", function (jsonObject) {
             //Covert the sections in a tab to map
             var sectionsMap = {};
             tab.sections.forEach(function (section) {
-                var sectionKey = section.type.toLowerCase().replace(/\s/g, "_"); //Replace all spaces with _
+                var identifier = section.title || section.type;
+                var sectionKey = identifier.toLowerCase().replace(/\s/g, "_"); //Replace all spaces with _
                 sectionsMap[sectionKey] = section;
             });
             tab.sections = sectionsMap;
